@@ -48,7 +48,7 @@ my_queries = ["All I want for Christmas is [MASK]",
 
 
 ## This function will take in a masked sentence and return a list of predictions
-def predict_masked_sent(text, top_k=100):
+def predict_masked_sent(text, top_k):
     # Tokenize input
     my_words = []
     text = "[CLS] %s [SEP]"%text
@@ -74,10 +74,10 @@ def predict_masked_sent(text, top_k=100):
      
 ## Runs all queries, generating 2000 candidates for each;
 ## returns a list of unique candidate words
-def get_all_words(my_queries):
+def get_all_words(my_queries, tk):
     all_words = []
     for mm in my_queries:
-        all_words += predict_masked_sent(mm, top_k=100)
+        all_words += predict_masked_sent(mm, tk)
         all_words = list(set(all_words))
     return(all_words)    
 
@@ -108,7 +108,7 @@ def filter_for_characters(some_words):
     return(fcw)
 
  
- ## Finds pairs of words where the length sums to 10
+## Finds pairs of words where the length sums to 10
 def find_pairs_sum_ten(good_words):
     sum_ten = []
     while good_words:
@@ -121,6 +121,7 @@ def find_pairs_sum_ten(good_words):
     return(sum_ten)
  
 
+## Find pairs we can spell with BUENOSAIRES; should contain solution
 def filter_buenos_aires_pairs(some_pairs):
     ba_pairs = []
     my_chars = ["b", "u", "e", "n", "o", "s", "a", "i", "r", "e", "s"]
@@ -141,7 +142,8 @@ def filter_buenos_aires_pairs(some_pairs):
  
 
 def main():
-    all_words = get_all_words(my_queries)
+    my_top_k = 1500  ## the number of predictions per query
+    all_words = get_all_words(my_queries, my_top_k)
     fl_words = filter_for_length(all_words)
     fc_words = filter_for_characters(fl_words)
     ten_sums = find_pairs_sum_ten(fc_words)
