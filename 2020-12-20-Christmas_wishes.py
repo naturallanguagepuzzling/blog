@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 
 
-## 2021/01/02. Levi K. From the blog, https://naturallanguagepuzzling.blogspot.com
+## 2021/01/02. Levi K. From the blog,
+## https://naturallanguagepuzzling.blogspot.com
 ## This code was written to assist with the 2020/12/20 Sunday Puzzle:
 ## https://www.npr.org/2020/12/20/948348016/sunday-puzzle-christmas-capitals
 
 ## The "predict_masked_sent" function below was copied and adapted from:
-## https://gist.githubusercontent.com/yuchenlin/a2f42d3c4378ed7b83de65c7a2222eb2/raw/c83fbf49f19f06034633a8508804a16eb399172e/masked_word_prediction_bert.py
+## https://gist.githubusercontent.com/yuchenlin/
+## a2f42d3c4378ed7b83de65c7a2222eb2/raw/
+## c83fbf49f19f06034633a8508804a16eb399172e/masked_word_prediction_bert.py
 
 import torch
 from transformers import BertTokenizer, BertModel, BertForMaskedLM
@@ -19,7 +22,8 @@ model = BertForMaskedLM.from_pretrained('bert-base-uncased')
 model.eval()
 # model.to('cuda')  # if you have gpu
 
-## We use this list to query our BERT model. We expect the words in the solution to appear in contexts like "[MASK]" here.
+## We use this list to query our BERT model.
+## We expect the words in the solution to appear in contexts like "[MASK]" here.
 my_queries = ["All I want for Christmas is [MASK]",
             "All I want for Christmas is a [MASK]",
             "[MASK] are selling out this Christmas",
@@ -68,7 +72,8 @@ def predict_masked_sent(text, top_k=100):
     return my_words
    
      
-## Runs all queries, generating 2000 candidates for each; returns a list of unique candidate words
+## Runs all queries, generating 2000 candidates for each;
+## returns a list of unique candidate words
 def get_all_words(my_queries):
     all_words = []
     for mm in my_queries:
