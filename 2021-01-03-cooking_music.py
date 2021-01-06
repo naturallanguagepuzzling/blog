@@ -65,7 +65,7 @@ music_seeds = ['a-capella', 'acapella', 'acoustic', 'adagio', 'allegro',
                'upbeat', 'vibrato', 'vocal', 'waltz', 'yodeling']
 
 
-## Finds top 1000 most similar words for each seed word
+## Finds top n most similar words for each seed word
 def get_similar_words(word_vectors: Type[KeyedVectors],
                       seed_word: str, n_synonyms: int=2000) -> None:
     result_words = []
@@ -76,7 +76,7 @@ def get_similar_words(word_vectors: Type[KeyedVectors],
     return result_words
 
 
-## Runs every seed word in a list, combines all results into a flat list of types
+## Runs every seed word in list, combines all results into flat list of types
 def run_seed_list(my_model, my_seeds):
     all_results = []
     for ms in my_seeds:
@@ -182,3 +182,100 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+### Current output; does not contain a solution...
+"""
+-british  brirish
+-english  engrish
+-working  wording
+air-land  airband
+all-aged  alleged
+anti-man  ant-man
+ash-gray  ashtray
+bad-hand  badland
+bat-wing  bathing
+blue-ray  blu-ray
+blue-red  blurred
+call-ins  calvins
+car-like  carmike
+cool-off  cookoff
+crew-cut  crescut
+de-aging  dealing
+dead-man  dearman
+dog-food  dogwood
+draw-off  dranoff
+e-voting  evoking
+english-  engrish
+eun-sung  eunjung
+eye-ball  eyewall
+farm-out  far-out
+fuc-king  fucjing
+hae-sung  haejung
+half-man  hallman
+half-ton  halston
+half-way  hallway
+hand-out  hangout
+hot-fire  hotwire
+hot-pink  hotlink
+hot-spot  hot-pot
+hye-jung  hyesung
+hyo-jung  hyosung
+in-shape  inscape
+in-shore  instore
+in-store  inshore
+ju-jitsu  jujutsu
+ju-jutsu  jujitsu
+low-band  lowland
+man-hour  mansour
+man-lion  mansion
+man-lion  mantion
+mess-age  mesaage
+mid-life  midwife
+mid-west  midtest
+mini-set  mindset
+mis-sell  mishell
+new-home  newsome
+new-wave  newfave
+non-food  nonwood
+non-good  nonwood
+non-kpop  non-pop
+off-load  offroad
+out-sold  outcold
+part-way  parkway
+pic-wish  pictish
+pop-funk  poppunk
+pop-tart  pop-art
+pre-camp  pre-amp
+pre-fire  premire
+pre-lent  present
+pre-lent  prevent
+pre-race  preface
+pro-cess  progess
+pro-cess  prowess
+pro-rate  prolate
+pro-rate  provate
+pro-side  provide
+pro-west  protest
+re-state  rescate
+red-wine  redline
+reddish-  redfish
+sea-lion  seasion
+shake-up  shapeup
+shape-up  shakeup
+shit-ton  shipton
+six-line  sixtine
+step-son  stenson
+sub-king  subbing
+sub-king  subring
+sub-sect  subiect
+sub-sect  subject
+tank-led  tangled
+tape-out  tap-out
+tri-city  trinity
+un-doing  undying
+walk-ons  waltons
+war-worn  wartorn
+worn-out  workout
+wwii-era  wwi-era
+"""
