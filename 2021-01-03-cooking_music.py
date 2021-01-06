@@ -13,11 +13,56 @@ from gensim.models import KeyedVectors
 from typing import Type
 
 
-vec_models = ['glove-wiki-gigaword-100', 'glove-wiki-gigaword-300', 'word2vec-google-news-300', 'glove-twitter-200', 'fasttext-wiki-news-subwords-300', 'conceptnet-numberbatch-17-06-300']
+vec_models = ['glove-wiki-gigaword-100', 'glove-wiki-gigaword-300',
+              'word2vec-google-news-300', 'glove-twitter-200',
+              'fasttext-wiki-news-subwords-300',
+              'conceptnet-numberbatch-17-06-300']
 
-cooking_seeds = ['arabic', 'atkins', 'bain-marie', 'bake', 'baked', 'baking', 'barbecue', 'barbecuing', 'blacken', 'blackening', 'blanch', 'blanching', 'boil', 'boiling', 'braise', 'braising', 'brazilian', 'broil', 'brown', 'browning', 'cajun', 'candied', 'casserole', 'cave-man', 'caveman', 'charbroil', 'charbroiling', 'chicken-fried', 'chinese', 'clambake', 'coddle', 'coddling', 'convection', 'cookoff', 'cook-off', 'cookout', 'cook-out', 'country-fried', 'country-style', 'creaming', 'cure', 'curing', 'dairy-free', 'decoction', 'deep-fried', 'deep-fry', 'dehydrate', 'detox', 'dry-roast', 'dry-roasting', 'dutch', 'ethiopian', 'ethnic', 'european', 'fat-free', 'ferment', 'fermenting', 'flambe', 'flame-broil', 'flat-top', 'french', 'fricassee', 'fruitarianism', 'fry', 'frying', 'german', 'gluten-free', 'greek', 'griddle', 'grill', 'grilled', 'grilling', 'halal', 'high-fat', 'home-style', 'hotpot', 'indian', 'infusion', 'italian', 'japanese', 'jewish', 'korean', 'kosher', 'low-carb', 'low-glycemic', 'low-heat', 'low-salt', 'macrobiotic', 'marinate', 'meal-kit', 'mediterranean', 'microwave', 'microwaving', 'middle-eastern', 'oaxacan', 'open-fire', 'open-pit', 'paleo', 'parboil', 'parboiling', 'pescetarian', 'pickle', 'pickled', 'pickling', 'plant-based', 'poach', 'poaching', 'pot-luck', 'raw-food', 'reduce', 'reduction', 'regional', 'roast', 'roasted', 'roasting', 'rotisserie', 'saute', 'sauteing', 'sear', 'searing', 'simmer', 'simmering', 'skewered', 'slow-carb', 'smoke', 'smoking', 'soul-food', 'sous-vide', 'steam', 'steaming', 'steep', 'steeping', 'stew', 'stewed', 'stewing', 'stir-fry', 'sun-dried', 'superfood', 'tex-mex', 'thai', 'toast', 'toasting', 'turkish', 'vegan', 'vegetarian', 'vietnamese']
+cooking_seeds = ['arabic', 'atkins', 'bain-marie', 'bake', 'baked', 'baking',
+                 'barbecue', 'barbecuing', 'blacken', 'blackening', 'blanch',
+                 'blanching', 'boil', 'boiling', 'braise', 'braising',
+                 'brazilian', 'broil', 'brown', 'browning', 'cajun', 'candied',
+                 'casserole', 'cave-man', 'caveman', 'charbroil',
+                 'charbroiling', 'chicken-fried', 'chinese', 'clambake',
+                 'coddle', 'coddling', 'convection', 'cookoff', 'cook-off',
+                 'cookout', 'cook-out', 'country-fried', 'country-style',
+                 'creaming', 'cure', 'curing', 'dairy-free', 'decoction',
+                 'deep-fried', 'deep-fry', 'dehydrate', 'detox', 'dry-roast',
+                 'dry-roasting', 'dutch', 'ethiopian', 'ethnic', 'european',
+                 'fat-free', 'ferment', 'fermenting', 'flambe', 'flame-broil',
+                 'flat-top', 'french', 'fricassee', 'fruitarianism', 'fry',
+                 'frying', 'german', 'gluten-free', 'greek', 'griddle', 'grill',
+                 'grilled', 'grilling', 'halal', 'high-fat', 'home-style',
+                 'hotpot', 'indian', 'infusion', 'italian', 'japanese',
+                 'jewish', 'korean', 'kosher', 'low-carb', 'low-glycemic',
+                 'low-heat', 'low-salt', 'macrobiotic', 'marinate', 'meal-kit',
+                 'mediterranean', 'microwave', 'microwaving', 'middle-eastern',
+                 'oaxacan', 'open-fire', 'open-pit', 'paleo', 'parboil',
+                 'parboiling', 'pescetarian', 'pickle', 'pickled', 'pickling',
+                 'plant-based', 'poach', 'poaching', 'pot-luck', 'raw-food',
+                 'reduce', 'reduction', 'regional', 'roast', 'roasted',
+                 'roasting', 'rotisserie', 'saute', 'sauteing', 'sear',
+                 'searing', 'simmer', 'simmering', 'skewered', 'slow-carb',
+                 'smoke', 'smoking', 'soul-food', 'sous-vide', 'steam',
+                 'steaming', 'steep', 'steeping', 'stew', 'stewed', 'stewing',
+                 'stir-fry', 'sun-dried', 'superfood', 'tex-mex', 'thai',
+                 'toast', 'toasting', 'turkish', 'vegan', 'vegetarian',
+                 'vietnamese']
 
-music_seeds = ['a-capella', 'acapella', 'acoustic', 'adagio', 'allegro', 'anthem', 'anthemic', 'aria', 'ballad', 'barbershop', 'bassy', 'be-bop', 'beat-box', 'beatbox', 'bluegrass', 'blues', 'bluesy', 'brassy', 'choir', 'choral', 'chromatic', 'country', 'crooner', 'cumbia', 'decrescendo', 'discordant', 'doo-wop', 'doowop', 'falsetto', 'flamenco', 'folk', 'fortissimo', 'funk', 'funky', 'harmonic', 'harmonious', 'harmony', 'hip-hop', 'instrumental', 'jazz', 'jazzy', 'karaoke', 'klezmer', 'libretto', 'march', 'mariachi', 'melody', 'melodious', 'metal', 'opera', 'operatic', 'operetta', 'orchestral', 'pentatonic', 'percussive', 'pianissimo', 'polyphonic', 'punk', 'ragtime', 'rap', 'rapping', 'reedy', 'reggae', 'rhythmic', 'rondo', 'salsa', 'scherzo', 'shanty', 'sonata', 'sonata', 'symphonic', 'tonal', 'up-beat', 'upbeat', 'vibrato', 'vocal', 'waltz', 'yodeling']
+music_seeds = ['a-capella', 'acapella', 'acoustic', 'adagio', 'allegro',
+               'anthem', 'anthemic', 'aria', 'ballad', 'barbershop', 'bassy',
+               'be-bop', 'beat-box', 'beatbox', 'bluegrass', 'blues', 'bluesy',
+               'brassy', 'choir', 'choral', 'chromatic', 'country', 'crooner',
+               'cumbia', 'decrescendo', 'discordant', 'doo-wop', 'doowop',
+               'falsetto', 'flamenco', 'folk', 'fortissimo', 'funk', 'funky',
+               'harmonic', 'harmonious', 'harmony', 'hip-hop', 'instrumental',
+               'jazz', 'jazzy', 'karaoke', 'klezmer', 'libretto', 'march',
+               'mariachi', 'melody', 'melodious', 'metal', 'opera', 'operatic',
+               'operetta', 'orchestral', 'pentatonic', 'percussive',
+               'pianissimo', 'polyphonic', 'punk', 'ragtime', 'rap', 'rapping',
+               'reedy', 'reggae', 'rhythmic', 'rondo', 'salsa', 'scherzo',
+               'shanty', 'sonata', 'sonata', 'symphonic', 'tonal', 'up-beat',
+               'upbeat', 'vibrato', 'vocal', 'waltz', 'yodeling']
 
 
 ## Finds top 1000 most similar words for each seed word
