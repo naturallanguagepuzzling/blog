@@ -13,41 +13,29 @@ from gensim.models import KeyedVectors
 from typing import Type
 
 
-vec_models = ['glove-wiki-gigaword-100', 'glove-wiki-gigaword-300',
-              'word2vec-google-news-300', 'glove-twitter-200',
-              'fasttext-wiki-news-subwords-300',
-              'conceptnet-numberbatch-17-06-300']
+vec_models = [
+    # 'glove-wiki-gigaword-100',  ## no bar-b-que
+    # 'glove-wiki-gigaword-300',  ## no bar-b-que
+    # 'word2vec-google-news-300',  ## no bar-b-que
+    'glove-twitter-200',  ## yes, found bar-b-que !
+    # 'fasttext-wiki-news-subwords-300',  ## yes, found bar-b-que !
+    # 'conceptnet-numberbatch-17-06-300'  ## no bar-b-que
+    ]
 
-cooking_seeds = ['arabic', 'atkins', 'bain-marie', 'bake', 'baked', 'baking',
-                 'barbecue', 'barbecuing', 'blacken', 'blackening', 'blanch',
-                 'blanching', 'boil', 'boiling', 'braise', 'braising',
-                 'brazilian', 'broil', 'brown', 'browning', 'cajun', 'candied',
-                 'casserole', 'cave-man', 'caveman', 'charbroil',
-                 'charbroiling', 'chicken-fried', 'chinese', 'clambake',
-                 'coddle', 'coddling', 'convection', 'cookoff', 'cook-off',
-                 'cookout', 'cook-out', 'country-fried', 'country-style',
-                 'creaming', 'cure', 'curing', 'dairy-free', 'decoction',
-                 'deep-fried', 'deep-fry', 'dehydrate', 'detox', 'dry-roast',
-                 'dry-roasting', 'dutch', 'ethiopian', 'ethnic', 'european',
-                 'fat-free', 'ferment', 'fermenting', 'flambe', 'flame-broil',
-                 'flat-top', 'french', 'fricassee', 'fruitarianism', 'fry',
-                 'frying', 'german', 'gluten-free', 'greek', 'griddle', 'grill',
-                 'grilled', 'grilling', 'halal', 'high-fat', 'home-style',
-                 'hotpot', 'indian', 'infusion', 'italian', 'japanese',
-                 'jewish', 'korean', 'kosher', 'low-carb', 'low-glycemic',
-                 'low-heat', 'low-salt', 'macrobiotic', 'marinate', 'meal-kit',
-                 'mediterranean', 'microwave', 'microwaving', 'middle-eastern',
-                 'oaxacan', 'open-fire', 'open-pit', 'paleo', 'parboil',
-                 'parboiling', 'pescetarian', 'pickle', 'pickled', 'pickling',
-                 'plant-based', 'poach', 'poaching', 'pot-luck', 'raw-food',
-                 'reduce', 'reduction', 'regional', 'roast', 'roasted',
-                 'roasting', 'rotisserie', 'saute', 'sauteing', 'sear',
-                 'searing', 'simmer', 'simmering', 'skewered', 'slow-carb',
-                 'smoke', 'smoking', 'soul-food', 'sous-vide', 'steam',
-                 'steaming', 'steep', 'steeping', 'stew', 'stewed', 'stewing',
-                 'stir-fry', 'sun-dried', 'superfood', 'tex-mex', 'thai',
-                 'toast', 'toasting', 'turkish', 'vegan', 'vegetarian',
-                 'vietnamese']
+cooking_seeds = ['bain-marie', 'bake', 'baking', 'barbecue', 'barbecuing',
+                 'blacken', 'blackening', 'blanch', 'blanching', 'boil',
+                 'boiling', 'braise', 'braising', 'browning', 'charbroil',
+                 'charbroiling', 'coddle', 'coddling', 'convection',
+                 'deep-fry', 'deep-frying', 'flambe', 'fricassee', 'fry',
+                 'frying', 'grill', 'grilling', 'microwaving', 'pan-fry',
+                 'pan-frying', 'parboil', 'parboiling', 'poach', 'poaching',
+                 'pressure-cooking', 'reduction', 'roast', 'roasting',
+                 'rotisserie', 'saute', 'sauteing', 'sear', 'searing',
+                 'simmer', 'simmering', 'smoke', 'smoking', 'sous-vide',
+                 'steam', 'steaming', 'steep', 'steeping', 'stew', 'stewing',
+                 'stir-fry', 'stir-frying', 'toast', 'toasting'
+                 ]
+
 
 music_seeds = ['a-capella', 'acapella', 'acoustic', 'adagio', 'allegro',
                'anthem', 'anthemic', 'aria', 'ballad', 'barbershop', 'bassy',
@@ -61,15 +49,15 @@ music_seeds = ['a-capella', 'acapella', 'acoustic', 'adagio', 'allegro',
                'operetta', 'orchestral', 'pentatonic', 'percussive',
                'pianissimo', 'polyphonic', 'punk', 'ragtime', 'rap', 'rapping',
                'reedy', 'reggae', 'rhythmic', 'rondo', 'salsa', 'scherzo',
-               'shanty', 'sonata', 'sonata', 'symphonic', 'tonal', 'up-beat',
+               'shanty', 'sonata', 'symphonic', 'tonal', 'up-beat',
                'upbeat', 'vibrato', 'vocal', 'waltz', 'yodeling']
 
-
+ 
 ## Finds top n most similar words for each seed word
 def get_similar_words(word_vectors: Type[KeyedVectors],
-                      seed_word: str, n_synonyms: int=2000) -> None:
+                      seed_word: str, n_synonyms: int=100) -> None:
     result_words = []
-    results = word_vectors.most_similar(topn=2000, positive=[seed_word])
+    results = word_vectors.most_similar(topn=100, positive=[seed_word])
     for r in results[:n_synonyms]:
         result_words.append(r[0].lower())
         # print(f"{r[0]:<15}: {r[1]:.3f}")
@@ -93,7 +81,7 @@ def run_seed_list(my_model, my_seeds):
     return all_results
 
 
-## some predicted "words" are numerals or contain numerals; this removes them
+## some predicted "words" are numerals or contain numerals; removes such words
 def remove_numerals(some_words):
     non_numerals = []
     for sw in some_words:
@@ -116,10 +104,10 @@ def hyphenated_only(some_words):
     return some_words
 
 
-## keep words of given length; 8 for cooking (7 letters + hyphen); 7 for music
+## keep words of given length; 7 (counting letters only, not hyphen)
 def filter_for_length(some_words, target_length):
     # print(some_words)
-    flw = [x for x in some_words if len(x.strip())==target_length]
+    flw = [x for x in some_words if len(re.sub("[^a-z]", "", x))==target_length]
     return(flw)
 
 
@@ -136,23 +124,16 @@ def find_matches(cooking, music):
                         print(cw, mw)
                         matches.append([cw, mw])
     return matches
-## Uncomment to run in interactive mode (comment out main() below)
-# while True:
-#     seed = input("Enter a seed word: ")
-#     rw = get_similar_words(word_vectors, seed_word=seed)
-#     for h in rw:
-#         print(h)
 
 
 def main():
-    # print("\nCollecting similar words for these cooking seed words:")
     all_cooking_results = list(cooking_seeds)  ## add seeds to candidate list
     all_music_results = list(music_seeds)
     for vec_model_name in vec_models:  ## use each model to generate candidates
         print("\n#####################################################\n")
-        print("Running model "+vec_model_name+
-              " to generate candidate words from seed words...\n")
+        print("Loading model "+vec_model_name+"...\n")
         vmodel = api.load(vec_model_name)
+        print("Generating candidate words from these seed words:\n")
         all_cooking_results+=run_seed_list(vmodel, cooking_seeds)
         all_music_results+=run_seed_list(vmodel, music_seeds)
     all_cooking_results = list(set(all_cooking_results))
@@ -161,121 +142,20 @@ def main():
     all_music_results.sort()
     hyphenated_cooking_words = hyphenated_only(all_cooking_results)
     clean_cooking_words = remove_numerals(hyphenated_cooking_words)
-    keep_cooking_words = filter_for_length(clean_cooking_words, 8)
+    keep_cooking_words = filter_for_length(clean_cooking_words, 7)
     print("\n#####################################################\n")
     print("Keeping these 7-letter hyphenated cooking words: ("
           +str(len(keep_cooking_words))+" total)")
     print(keep_cooking_words)
-    # for kc in keep_cooking_words:
-    #     print(kc)
     clean_music_words = remove_numerals(all_music_results)
     keep_music_words = filter_for_length(clean_music_words,7)
     print("\n#####################################################\n")
     print("Keeping these 7-letter music words: ("
           +str(len(keep_music_words))+" total)")
     print(keep_music_words)
-    # print("Looking for a music word that matches the pattern for these cooking "
-    #       "words:")
     solutions = find_matches(keep_cooking_words, keep_music_words)
     print(solutions)
 
 
 if __name__ == "__main__":
     main()
-
-
-### Current output; does not contain a solution...
-"""
--british  brirish
--english  engrish
--working  wording
-air-land  airband
-all-aged  alleged
-anti-man  ant-man
-ash-gray  ashtray
-bad-hand  badland
-bat-wing  bathing
-blue-ray  blu-ray
-blue-red  blurred
-call-ins  calvins
-car-like  carmike
-cool-off  cookoff
-crew-cut  crescut
-de-aging  dealing
-dead-man  dearman
-dog-food  dogwood
-draw-off  dranoff
-e-voting  evoking
-english-  engrish
-eun-sung  eunjung
-eye-ball  eyewall
-farm-out  far-out
-fuc-king  fucjing
-hae-sung  haejung
-half-man  hallman
-half-ton  halston
-half-way  hallway
-hand-out  hangout
-hot-fire  hotwire
-hot-pink  hotlink
-hot-spot  hot-pot
-hye-jung  hyesung
-hyo-jung  hyosung
-in-shape  inscape
-in-shore  instore
-in-store  inshore
-ju-jitsu  jujutsu
-ju-jutsu  jujitsu
-low-band  lowland
-man-hour  mansour
-man-lion  mansion
-man-lion  mantion
-mess-age  mesaage
-mid-life  midwife
-mid-west  midtest
-mini-set  mindset
-mis-sell  mishell
-new-home  newsome
-new-wave  newfave
-non-food  nonwood
-non-good  nonwood
-non-kpop  non-pop
-off-load  offroad
-out-sold  outcold
-part-way  parkway
-pic-wish  pictish
-pop-funk  poppunk
-pop-tart  pop-art
-pre-camp  pre-amp
-pre-fire  premire
-pre-lent  present
-pre-lent  prevent
-pre-race  preface
-pro-cess  progess
-pro-cess  prowess
-pro-rate  prolate
-pro-rate  provate
-pro-side  provide
-pro-west  protest
-re-state  rescate
-red-wine  redline
-reddish-  redfish
-sea-lion  seasion
-shake-up  shapeup
-shape-up  shakeup
-shit-ton  shipton
-six-line  sixtine
-step-son  stenson
-sub-king  subbing
-sub-king  subring
-sub-sect  subiect
-sub-sect  subject
-tank-led  tangled
-tape-out  tap-out
-tri-city  trinity
-un-doing  undying
-walk-ons  waltons
-war-worn  wartorn
-worn-out  workout
-wwii-era  wwi-era
-"""
