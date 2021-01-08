@@ -81,7 +81,7 @@ def run_seed_list(my_model, my_seeds):
     return all_results
 
 
-## some predicted "words" are numerals or contain numerals; removes such words
+## some predicted "words" contain numerals, "/", "#"; removes such words
 def remove_numerals(some_words):
     non_numerals = []
     for sw in some_words:
@@ -111,6 +111,8 @@ def filter_for_length(some_words, target_length):
     return(flw)
 
 
+## finds pairs that match the puzzle pattern (only middle letter differs after
+## removing hyphens)
 def find_matches(cooking, music):
     matches = []
     for cw in cooking:
