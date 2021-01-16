@@ -14,13 +14,12 @@
 import stanza
 import unidecode
 
-
 ## load tokenizer and named entity recognizer pipeline
 nlp = stanza.Pipeline(lang='en', processors='tokenize,ner')
 
 
 ## find named entities in the text, keep only PERSON names; among those, look
-## for ways to get target length of letters (full name, last name only, etc.)
+## for combos to get target length of letters (full name, last name only, etc.)
 def get_persons(f_name, letter_count):
     infile = open(f_name, "r")
     mytext = infile.read()
