@@ -70,8 +70,8 @@ def predict_masked_sent(text, top_k):
         # print(predicted_token)
         my_words.append(predicted_token)
     return my_words
-   
-     
+
+
 ## Runs all queries, generating 2000 candidates for each;
 ## returns a list of unique candidate words
 def get_all_words(my_queries, tk):
