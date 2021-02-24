@@ -16,99 +16,128 @@ rearrange the result to get the kind of cuisine of this dish. What is it?
 from slugify import slugify
 from itertools import combinations
 
-cooking = [
-	'bain-marie', 'bake', 'baking', 'barbecue', 'barbecuing', 'blacken',
-	'blackening', 'blanch', 'blanching', 'boil', 'boiling', 'braise',
-	'braising', 'browning', 'charbroil', 'charbroiling', 'coddle', 'coddling',
-	'convection', 'deep-fry', 'deep-frying', 'flambe', 'fricassee', 'fry',
-	'frying', 'grill', 'grilling', 'microwaving', 'pan-fry', 'pan-frying',
-	'parboil', 'parboiling', 'poach', 'poaching', 'pressure-cooking',
-	'reduction', 'roast', 'roasting', 'rotisserie', 'saute', 'sauteing',
-	'sear', 'searing', 'simmer', 'simmering', 'smoke', 'smoking', 'sous-vide',
-	'steam', 'steaming', 'steep', 'steeping', 'stew', 'stewing', 'stir-fry',
-	'stir-frying', 'toast', 'toasting'
-	]
 
-ethnic_cuisines = [
-	'Ainu', 'Albanian', 'Algerian', 'American', 'Andhra', 'Anglo-Indian',
-	'Arab', 'Argentine', 'Armenian', 'Assyrian', 'Awadhi', 'Azerbaijani',
-	'Balochi', 'Bangladeshi', 'Bashkir', 'Belarusian', 'Belgians', 'Bengali',
-	'Berber', 'Brazilian', 'British', 'Buddhist', 'Bulgarian', 'Cajun',
-	'Canadian', 'Cantonese', 'Caribbean', 'Chechen', 'Chinese', 'Circassian',
-	'Creole', 'Crimean', 'Cuban', 'Cypriot', 'Czech', 'Danish', 'Dutch',
-	'Egyptian', 'English', 'Eritrean', 'Estonian', 'Ethiopian', 'Filipino',
-	'French', 'Georgian', 'German', 'Goan', 'Greek', 'Gujarati', 'Haitian',
-	'Hawaiian', 'Hyderabad', 'Indian', 'Indonesian', 'Inuit', 'Irish',
-	'Italian', 'Jamaican', 'Japanese', 'Jewish', 'Karnataka', 'Kazakh',
-	'Kenyan', 'Keralite', 'Korean', 'Kurdish', 'Laotian', 'Latvian',
-	'Lebanese', 'Libyan', 'Lithuanian', 'Maharashtrian', 'Malay', 'Malaysian',
-	'Mangalorean', 'Mediterranean', 'Mennonite', 'Mexican', 'Mordovian',
-	'Mormon', 'Mughal', 'Native American', 'Nepalese', 'Nigerian', 'Odia',
-	'Pakistani', 'Parsi', 'Pashtun', 'Peranakan', 'Persian', 'Peruvian',
-	'Polish', 'Portuguese', 'Punjabi', 'Quebecois', 'Rajasthani', 'Romanian',
-	'Russian', 'Salvadorian', 'Sami', 'Scottish', 'Serbian', 'Sindhi',
-	'Singaporean', 'Slovak', 'Slovenian', 'Somali', 'Soviet', 'Spanish',
-	'Sri Lankan', 'Swedish', 'Tahitian', 'Taiwanese', 'Tamil', 'Tatar', 'Texan',
-	'Thai', 'Tibetan', 'Turkish', 'Udupi', 'Ukrainian', 'Vietnamese', 'Welsh',
-	'Yamal', 'Zambian', 'Zanzibari'
-	]
+## The full cuisine list is too long to include here, but it looks like this:
+raw_cuisines = ['Albanian', 'Algerian', 'Cajun', 'Chinese', 'Ethiopian']
+## "kind of cuisine" is a little ambiguous, so I include these too:
+style_cuisines = ["Fusion", "Haute", "Nouvelle", "Vegan", "Vegetarian", "Kosher", "Halal"]
+## The full list of cuisines is read in from this file:
+cuisinefile = open("resources/cuisines.txt", "r")
+## overwrite the example list above:
+raw_cuisines = cuisinefile.readlines()
+cuisinefile.close()
+raw_cuisines = raw_cuisines+style_cuisines
+raw_cuisines = [cl.strip() for cl in raw_cuisines if cl]
+raw_cuisines.sort()
 
-style_cuisines = [
-	"Fusion", "Haute", "Nouvelle", "Vegan", "Vegetarian", "Kosher", "Halal"
-	]
+## The real food list is too long to include here, but it looks like this:
+raw_foods = ["alfalfa sprouts", "bagel and lox", "fried rice", "waldorf pudding"]
+## The full list of foods is read in from this file:
+foodfile = open("resources/foods.txt", "r")
+## overwrite the example list above:
+raw_foods = foodfile.readlines()
+foodfile.close()
+raw_foods = [fl.strip() for fl in raw_foods if fl]
+raw_foods.sort()
 
-foods = ['fried rice', 'abalone', 'ahi', 'aioli', 'albacore', 'alfalfa', 'alfredo', 'almond', 'almonds', 'ambrosia', 'antelope', 'apple', 'apples', 'applesauce', 'arepa', 'arepas', 'artichoke', 'arugala', 'asparagus', 'aubergine', 'avacado', 'avocado', 'babaganoosh', 'bacon', 'bagel', 'bagels', 'baguette', 'bahn', 'bahnmi', 'baklava', 'bamboo', 'banana', 'bananas', 'bangers', 'bar-b-cue', 'bar-b-que', 'barbecue', 'barbeque', 'barley', 'barramundi', 'basmati', 'bbq', 'bean', 'beans', 'beef', 'bento', 'berliner', 'bialy', 'bibimbap', 'biryani', 'biscuit', 'biscuits', 'bison', 'bisque', 'bistecca', 'blintzes', 'blueberries', 'blueberry', 'bluefish', 'boeuf', 'bonbon', 'bonbons', 'borscht', 'bouffe', 'bouillabaisse', 'bourbon', 'bourgogne', 'bourguignon', 'bourguignonne', 'bread', 'breads', 'breadsticks', 'breakfast', 'brie', 'briocha', 'brioche', 'broccoli', 'broth', 'brownies', 'bruscetta', 'bufala', 'buffalo', 'bulgogi', 'bulgur', 'bun', 'buns', 'burger', 'buritto', 'burrata', 'burritos', 'burta', 'butterscotch', 'cabbage', 'caesar', 'cake', 'cakes', 'calzone', 'camembert', 'cannoli', 'cantalope', 'capers', 'caprese', 'caramel', 'cardamom', 'carne', 'carp', 'carrot', 'carrots', 'cashew', 'casserole', 'catfish', 'caviar', 'celery', 'celery-leaf', 'cereal', 'ceviche', 'challah', 'chanterelles', 'charcuterie', 'cheddar', 'cheese', 'cheeseburger', 'cheesecake', 'cheetos', 'cherry', 'cherries', 'chestnut', 'chestnuts', 'chicken', 'chickpeas', 'chimichanga', 'chimichurri', 'chip', 'chips', 'chocolat', 'chocolate', 'chowder', 'churro', 'churros', 'clam', 'clams', 'cobb', 'cobbler', 'coconut', 'codfish', 'compote', 'conch', 'congee', 'cookie', 'cookies', 'corn', 'cornbread', 'couscous', 'crab', 'crabcakes', 'crabs', 'crackers', 'cranberry', 'crawfish', 'crepe', 'crepes', 'croissant', 'croque', 'croquette', 'croquettes', 'crostini', 'cupcakes', 'currants', 'curry', 'cuttlefish', 'dal', 'date', 'dates', 'dolma', 'dolmas', 'doner', 'donuts', 'doritos', 'duck', 'dulce', 'dumplings', 'eclairs', 'edamame', 'edimame', 'eel', 'eels', 'egg', 'eggplant', 'eggrolls', 'eggs', 'empanada', 'empanadas', 'enchilada', 'enchiladas', 'endive', 'escargots', 'etoufee', 'fajita', 'fajitas', 'falafel', 'fenugreek', 'fez', 'fig', 'figs', 'fish', 'flambee', 'flank', 'foie', 'foiegras', 'fondu', 'fontina', 'frankfurter', 'franks', 'fricassee', 'frijoles', 'frisee', 'frita', 'frites', 'frito', 'fritters', 'frog', 'frontera', 'fruit', 'fruitcake', 'frybread', 'fudge', 'garlic', 'gazpacho', 'gefilte', 'gefiltefish', 'gelatin', 'gelato', 'gelee', 'geoduck', 'ganoush', 'ghanoush', 'babaghanoush', 'babaganoush', 'ginger', 'gizzard', 'gnocchi', 'goat', 'gochujang', 'goose', 'gooseberry', 'gorgonzola', 'goulash', 'graham', 'grahamcracker', 'granola', 'grape', 'grapefruit', 'grapes', 'gratin', 'gravy', 'grits', 'grouse', 'guacamole', 'guava', 'gumbo', 'gyro', 'haggis', 'halibut', 'ham', 'hamburger', 'hash', 'hassleback', 'hazelnuts', 'herring', 'honey', 'honeydew', 'horseradish', 'huckleberries', 'huevos', 'hummus', 'jalapeno', 'jalebi', 'jam', 'jambalaya', 'jambon', 'jamon', 'japchae', 'jelly', 'jellyfish', 'jerk', 'jerky', 'juice', 'kabob', 'kabobs', 'kale', 'kebab', 'kebabs', 'shishkabob', 'shishkabobs', 'shishkebab', 'shishkebabs', 'shishkebob', 'shishkebobs', 'ketchup', 'kielbasa', 'kimchi', 'kingfish', 'kishkes', 'kiwi', 'knishes', 'knodel', 'kohlrabi', 'kombu', 'lamb', 'lambs', 'lammestek', 'lasagna', 'lasagne', 'lassi', 'latkes', 'leche', 'lemon', 'lemons', 'lentil', 'lentils', 'licorice', 'lime', 'lingonberries', 'linguine', 'liver', 'liverwurst', 'lobster', 'loin', 'loquat', 'lorraine', 'lotus', 'lox', 'lychee', 'mac', 'macadamia', 'macaroni', 'macaron', 'macarons', 'macaroon', 'macaroons', 'manchego', 'mango', 'marinara', 'marmalade', 'marrow', 'marshmallow', 'marzipan', 'masala', 'mascarpone', 'mash', 'meat', 'meatballs', 'meatloaf', 'melba', 'melon', 'melons', 'meringue', 'migas', 'milkshake', 'mince', 'minestrone', 'mint', 'miso', 'mousse', 'mozzarella', 'muffaletta', 'muffin', 'muffins', 'mulligatawny', 'mushroom', 'mushrooms', 'mussels', 'mussles', 'mustard', 'naan', 'nachos', 'nicoise', 'noodle', 'noodles', 'nopales', 'nuggets', 'nutmeg', 'nuts', 'olive', 'olives', 'omelet', 'omelette', 'omlet', 'onigiri', 'onion', 'onions', 'orange', 'oreo', 'orzo', 'ostrich', 'ovos', 'oyster', 'oysters', 'padthai', 'paella', 'pan', 'pancake', 'pancakes', 'papa', 'papaya', 'parmesan', 'parmigiano', 'pasta', 'pastel', 'pastrami', 'pastry', 'pasty', 'pate', 'patty', 'peach', 'peaches', 'peanut', 'peanuts', 'pear', 'peas', 'pecan', 'pecorino', 'peppercorns', 'pepperoni', 'peppers', 'persimmon', 'pesce', 'pesto', 'pheasant', 'pho', 'pickles', 'pie', 'pierogi', 'pierogies', 'pies', 'pigeon', 'pigs', 'pike', 'pilaf', 'pineapple', 'pistachios', 'pizza', 'po-boy', 'poke', 'pokey', 'polenta', 'pollo', 'pomegranate', 'pommes', 'popcorn', 'pork', 'porridge', 'potato', 'potatoes', 'poutine', 'prawn', 'prawns', 'pretzel', 'prosciutto', 'pudding', 'puff', 'pumpernickel', 'pumpkin', 'quesadilla', 'quiche', 'quinoa', 'rabe', 'raclette', 'radishes', 'rambutan', 'ramen', 'raspberries', 'ratatouille', 'ravioli', 'relish', 'reuben', 'ribs', 'rice', 'ricotta', 'rijsttafel', 'risotto', 'roast', 'roll', 'rolls', 's-mores', 'saag', 'sablefish', 'saffron', 'salad', 'salami', 'salmon', 'salsa', 'saltfish', 'saltwater', 'sambal', 'sandwich', 'sandwiches', 'saratoga', 'satay', 'sauerkraut', 'saurkraut', 'sausage', 'sausages', 'savoy', 'scallion', 'scallions', 'scampi', 'schnitzel', 'scotch', 'scottish', 'seafood', 'seed', 'seeds', 'semsemiyeh', 'sesame', 'shabu-shabu', 'shellfish', 'shitake', 'shoots', 'shortbread', 'shrimp', 'shrimps', 'snaps', 'soba', 'sofra', 'sole', 'sopa', 'sopaipilla', 'sorrel', 'sorrell', 'sorrento', 'souffle', 'soufflees', 'soup', 'sourdough', 'soy', 'spaghetti', 'spanakopita', 'spinach', 'springbok', 'squash', 'squid', 'squirrel', 'steak', 'stew', 'stilton', 'strawberries', 'strawberry', 'stroganoff', 'stuffing', 'submarine', 'sugarplums', 'sulze', 'sundae', 'sushi', 'sweetbreads', 'tabbouleh', 'taco', 'tacos', 'taffy', 'tagine', 'tahini', 'tamal', 'tamale', 'tamales', 'tamarind', 'tandoori', 'tangerine', 'tapas', 'tart', 'tarte', 'tater', 'tatertot', 'tempura', 'tenders', 'teriyaki', 'tiramisu', 'toast', 'toffee', 'tofu', 'tomato', 'tomatoes', 'tongue', 'torta', 'torte', 'tortilla', 'tortillas', 'tostones', 'tots', 'tourte', 'tourtiere', 'treacle', 'truffle', 'truffles', 'tuna', 'turkey', 'twinkies', 'vanilla', 'veal', 'vegemite', 'venison', 'vidalia', 'vindaloo', 'wafer', 'waffles', 'wagyu', 'wakame', 'walnut', 'walnuts', 'wasabi', 'watercress', 'watermelon', 'whitefish', 'wiener', 'wings', 'wurst', 'xiaolongbau', 'xiaolongbao', 'yogurt', 'yuzu', 'ziti', 'zucchini', 'panini', 'panino']
+## The real philosopher list is too long to include here, but it looks like this:
+raw_philos = ["john calvin", "martin heidegger", "friedrich nietzsche", "karl marx"]
+## The full list of foods is read in from this file:
+philosfile = open("resources/philosophers.txt", "r")
+## overwrite the example list above:
+raw_philos = philosfile.readlines()
+raw_philos = [pl.strip() for pl in raw_philos if pl]
+raw_philos.sort()
+
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+			'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
 
-alphabet = [
-	'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
-	'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-	]
+## takes the list of foods and expands it by recombining words:
+## "country fried steak"
+## BECOMES -->
+## "country"
+## "fried"
+## "steak"
+## "country fried"
+## "country steak"
+## "fried steak"
+## "country fried steak"
+## it overgenerates and it's messy but we don't care!
+def expand_foods(my_foods):
+	r_foods = [fl.strip() for fl in my_foods if fl]
+	expanded = []
+	for rf in r_foods:
+		rf = rf.split(" ")
+		for i in range(1, len(rf)+1):
+			for combo in combinations(rf, i):
+				combo = " ".join(combo)
+				if combo not in expanded:
+					expanded.append(combo)
+	expanded.sort()
+	return expanded
 
 
+## checks if string ends with "s"; if not, adds "s"; if yes, deletes "s";
+## a dirty way to expand our list by approximating singulars/plurals
+def get_dirty_plurals(cstr):
+	alts = [cstr]
+	if cstr.endswith("s"):
+		alts.append(cstr[:-1])
+	else:
+		alts.append(cstr+"s")
+	return alts
+
+
+## lowercase, strip non-letters, convert special/accented letters to ASCII
+## e.g., "homard à l'américaine" --> "homard a lamericaine"
 def prep_foods(myfoods):
-	keepers = []
+	holders = []
 	for mf in myfoods:
 		mf = mf.lower().split(" ")
 		joint = []
 		for m in mf:
 			m = slugify(m)
+			m = ''.join([i for i in m if i.isalpha()])
 			joint.append(m)
-			if m not in keepers:
-				keepers.append(m)
+			if m not in holders:
+				holders.append(m)
 		jt = ''.join(joint)
-		if jt not in keepers:
-			keepers.append(jt)
+		if jt not in holders:
+			holders.append(jt)
+	holders.sort()
+	keepers = []
+	for h in holders:
+		kk = get_dirty_plurals(h)
+		for k in kk:
+			if k not in keepers:
+				keepers.append(k)
 	return keepers
 
 
+## lowercase, strip non-letters, convert special/accented letters to ASCII;
+## also return name as [firstname, lastname]
+## e.g., "Stanisław Ignacy Witkiewicz" --> ["Stanislaw", "Witkiewicz"]
+## e.g., "Socrates" --> ["Socrates", "NONE"]
+## Note that the list I'm using is somewhat pre-processed already
 def prep_philosopher(my_philo):
-	mp = my_philo.lower().split(" ")
+	mp = my_philo.split("#")[0].strip()
+	mp = mp.split(" ")
 	fname = mp[0]
 	fname = slugify(fname)
 	fname = ''.join([i for i in fname if i.isalpha()])
+	fname = fname.lower()
 	if len(mp) == 1:
 		lname = "NONE"
 	else:
 		lname = mp[-1]
 		lname = slugify(lname)
 		lname = ''.join([i for i in lname if i.isalpha()])
+		lname = lname.lower()
 	return fname, lname
 
 
-
-## lowercase all letters, remove punctuation, return first and last name
-def prep_personal_name(some_name):
-    s = some_name.lower()
-    s = s.split(" ")
-    f = s[0]
-    l = s[-1]
-    f = ''.join([i for i in f if i.isalpha()])
-    l = ''.join([i for i in l if i.isalpha()])
-    return f, l
-
-
-## lowercase all letters; remove numerals.
+## lowercase letters; remove numerals, convert accented chars to plain ASCII:
 def prep_cuisine(mc):
 	pc = mc.lower()
 	pc = ''.join([i for i in pc if i.isalpha()])
@@ -116,6 +145,9 @@ def prep_cuisine(mc):
 	return pc
 
 
+## recursive function, takes a string, returns all the possible new strings
+## where n (integer) positions in the original string have been replaced with
+## another letter; calls one_swap function for each cycle until reaching n;
 def swap_letters(n, some_string):
 	some_string = [[some_string]]
 	while n > 0:
@@ -124,9 +156,12 @@ def swap_letters(n, some_string):
 	return [c[1] for c in some_string]
 
 
+## takes a string, plus a list of indices; the indices indicate any positions
+## in the string that have already been swapped; function leaves the changed
+## positions alone and returns all the possible strings with one new position
+## swapped to a new letter
 def one_swap(sstring):
 	swaps = []
-	# alphabet = ['a', 'b', 'c']
 	for ixs_stg in sstring:
 		if len(sstring) == 1:
 			ixs = []
@@ -153,7 +188,9 @@ def one_swap(sstring):
 	return swaps
 
 
-
+## takes an integer n and a string, returns all the possible new strings after
+## deleting n letters;
+## e.g., drop_letters(2, "pear") --> ["pe", "pa", "pr", "ea", "er", "ar"]
 def drop_letters(n, some_string):
 	new_strings = []
 	substrings = [list(c) for c in combinations(
@@ -162,7 +199,11 @@ def drop_letters(n, some_string):
 	return new_strings
 	
 
-## sort each string's letters, then compare
+## lowercase, sort each string's letters, then compare;
+## e.g., is_anagram("dog", "God") -->
+## "dog" --> "dgo"
+## "God" --> "god" --> "dgo"
+## "dgo" == "dgo" --> "True"
 def is_anagram(x, y):
     x = x.lower()
     x = list(x)
@@ -178,54 +219,36 @@ def is_anagram(x, y):
         return False
 
 
-def get_dirty_plurals(cstr):
-	alts = [cstr]
-	if cstr.endswith("s"):
-		alts.append(cstr[:-1])
-	else:
-		alts.append(cstr+"s")
-	return alts
-
 
 def main():
-	# cuisines = cooking+ethnic_cuisines+style_cuisines
-	cuisines = cooking+ethnic_cuisines+style_cuisines+foods
-	cuisines = [prep_cuisine(cu) for cu in cuisines]
-	# foods = foods1+foods2
-	foodlist = cuisines+foods
-	foodlist = prep_foods(foodlist)
-	foodlist = list(set(foodlist))
-	foodlist.sort()
-	print(len(foodlist))
-	print(len(cuisines))
-	# for f in foodlist:
-	# 	print(f)
-	# philofile = open('../working/clean_philosophers.txt', 'r')
-	philofile = open('resources/philosophers.txt', 'r')
-	philosophers = philofile.readlines()
-	philosophers = [p.split("#")[0].strip() for p in philosophers]
+	## next lines simply clean and expand lists to forms needed for comparison
+	cuisines = [prep_cuisine(cu) for cu in raw_cuisines]
+	foods = expand_foods(raw_foods)
+	foods = prep_foods(foods)
+	philosophers = [prep_philosopher(p) for p in raw_philos]
+	## iterate through list of philosophers
 	for philo in philosophers:
-		fphil, lphil = prep_philosopher(philo)
-		# print(fphil, lphil)
+		fphil, lphil = philo[0], philo[1]
+		## reject any without a last name ("socrates", "plato", etc.)
 		if lphil == "NONE":
 			pass
 		else:
+			## get all possible respellings of first name when we swap 1 letter
 			fcandidates = swap_letters(1, fphil)
+			## get all possible strings from last name when we drop 2 letters
+			lcandidates = drop_letters(2, lphil)
+			## iterate through first name respellings
 			for fc in fcandidates:
-				# print(fphil, fc)
-				if fc in foodlist:
-					# print("FOOD: "+philo+" "+fc)
-					lcandidates = drop_letters(2, lphil)
+				## continue only if first name respelling is found in food list
+				if fc in foods:
+					## iterate through last name string candidates
 					for lc in lcandidates:
+						## iterate through cuisines
 						for cu in cuisines:
-							# ccandidates = drop_letters(2, cu)
-							# for cc in ccandidates:
-							ccalts = get_dirty_plurals(cu)
-							# print(ccalts)
-							for ca in ccalts:
-								if is_anagram(lc, ca):
-									print("SOLUTION: ")
-									print(philo, fc, ca, cu)
+							## check if last name candidate matches the cuisine
+							if is_anagram(lc, cu):
+								print("SOLUTION: "+fphil+" "+lphil, fc, cu)
+
 
 					
 if __name__ == "__main__":

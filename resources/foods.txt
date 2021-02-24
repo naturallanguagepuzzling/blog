@@ -63,6 +63,7 @@ arepa
 arepas
 arizona iced tea
 armoricaines
+arter med fläsk plätter
 artichoke
 arugala
 arugula
@@ -397,9 +398,11 @@ celery root balls
 celery-leaf
 celery-leaf salad
 cereal
+cerkez tavuğu
 cervelle de canut
 cervelles au beurre noir
 cervello arreganata
+cevapčići
 ceviche
 cha ca la vong
 chai tea
@@ -708,7 +711,6 @@ eggs
 eggs benedict
 eggs sardou
 egusi seeds
-el bulli - the movie
 elk
 empanada
 empanadas
@@ -723,6 +725,7 @@ english mustard
 ensaymada
 enstrom's almond toffee
 epoisses
+epoisses de bourgogne
 escabeche
 escargots
 escargots à la bourguignonne
@@ -2188,11 +2191,7 @@ zhangcha duck
 zhoug
 zimtsterne
 ziti
-zucchini 
+zucchini
 zucchini flowers
 zuger kirschtorte
 zwiebelrostbraten
-ärter med fläsk, plätter
-çerkez tavuğu
-époisses de bourgogne
-ćevapčići
