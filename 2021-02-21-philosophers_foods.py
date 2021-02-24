@@ -203,7 +203,7 @@ def main():
 	# philofile = open('../working/clean_philosophers.txt', 'r')
 	philofile = open('resources/philosophers.txt', 'r')
 	philosophers = philofile.readlines()
-	philosophers = [x.strip() for x in philosophers]
+	philosophers = [p.split("#")[0].strip() for p in philosophers]
 	for philo in philosophers:
 		fphil, lphil = prep_philosopher(philo)
 		# print(fphil, lphil)
