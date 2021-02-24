@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 ## 2021/02/22. Levi King. From the blog,
 ## https://naturallanguagepuzzling.blogspot.com
 ## This code was written to assist with the 2021/02/21 Sunday Puzzle:
