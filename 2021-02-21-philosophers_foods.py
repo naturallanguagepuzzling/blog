@@ -19,7 +19,8 @@ from itertools import combinations
 ## The full cuisine list is too long to include here, but it looks like this:
 raw_cuisines = ['Albanian', 'Algerian', 'Cajun', 'Chinese', 'Ethiopian']
 ## "kind of cuisine" is a little ambiguous, so I include these too:
-style_cuisines = ["Fusion", "Haute", "Nouvelle", "Vegan", "Vegetarian", "Kosher", "Halal"]
+style_cuisines = ["Fusion", "Haute", "Nouvelle", "Vegan", "Vegetarian",
+				  "Kosher", "Halal"]
 ## The full list of cuisines is read in from this file:
 cuisinefile = open("resources/cuisines.txt", "r")
 ## overwrite the example list above:
@@ -30,7 +31,8 @@ raw_cuisines = [cl.strip() for cl in raw_cuisines if cl]
 raw_cuisines.sort()
 
 ## The real food list is too long to include here, but it looks like this:
-raw_foods = ["alfalfa sprouts", "bagel and lox", "fried rice", "waldorf pudding"]
+raw_foods = ["alfalfa sprouts", "bagel and lox", "fried rice",
+			 "waldorf pudding"]
 ## The full list of foods is read in from this file:
 foodfile = open("resources/foods.txt", "r")
 ## overwrite the example list above:
@@ -40,7 +42,8 @@ raw_foods = [fl.strip() for fl in raw_foods if fl]
 raw_foods.sort()
 
 ## The real philosopher list is too long to include here, but it looks like this:
-raw_philos = ["john calvin", "martin heidegger", "friedrich nietzsche", "karl marx"]
+raw_philos = ["john calvin", "martin heidegger","friedrich nietzsche",
+			  "karl marx"]
 ## The full list of foods is read in from this file:
 philosfile = open("resources/philosophers.txt", "r")
 ## overwrite the example list above:
