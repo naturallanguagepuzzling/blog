@@ -249,7 +249,7 @@ def main():
 						for cu in cuisines:
 							## check if last name candidate matches the cuisine
 							if is_anagram(lc, cu):
-								print("SOLUTION: "+fphil+" "+lphil, fc, cu)
+								print("SOLUTION: "+fphil+" "+lphil+" <--> "+fc+", "+cu)
 
 
 					
