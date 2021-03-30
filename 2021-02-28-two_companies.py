@@ -34,13 +34,14 @@ bertMaskedLM.eval()
 ## check for a (5,5) or (5,7,5) match
 optional_wds = [
     '&', 'a', 'a/s', 'ab', 'ag', 'bhd', 'branch', 'brand', 'brands', 'bv', 'cc',
-    'co', 'companies', 'company', 'consolidated', 'corp', 'corporation', 'cos',
-    'cv', 'dba', 'de', 'enterprise', 'enterprises', 'gk', 'gmbh', 'group',
-    'grp', 'holdings', 'inc', 'incorporated', 'industries', 'international',
-    'intl', 'intl.', 'kg', 'kk', 'limited', 'llc', 'ltd', 'manufacturing',
-    'mbh', 'mfg', 'ooo', 'partners', 'partnership', 'pte', 'pty', 'rl', 's',
-    'sa', 'sarl', 'sas', 'sau', 'sdn', 'service', 'services', 'spa', 'srl',
-    'sro', 'svcs', 'too', 'tov', 'trust', 'works', 'coltd'
+    'co', 'coltd', 'companies', 'company', 'consolidated', 'corp',
+    'corporation', 'cos', 'cv', 'dairies', 'dairy', 'dba', 'de', 'enterprise',
+    'enterprises', 'foods', 'gk', 'gmbh', 'group', 'grp', 'holdings', 'inc',
+    'incorporated', 'industries', 'international', 'intl', 'intl.', 'kg', 'kk',
+    'limited', 'llc', 'ltd', 'manufacturing', 'mbh', 'mfg', 'ooo', 'partners',
+    'partnership', 'pte', 'pty', 'rl', 's', 'sa', 'sarl', 'sas', 'sau', 'sdn',
+    'service', 'services', 'spa', 'srl', 'sro', 'studio', 'studios', 'svcs',
+    'too', 'tov', 'trust', 'works'
     ]
 
 
@@ -169,10 +170,10 @@ def main():
         m_alts += mcalts
     candas = get_company_a_candidates(m_alts)  ## 5,5
     candbs = get_company_b_candidates(m_alts)  ## 5,7,5
-    for ca in candas: print(ca)
-    for cb in candbs: print(cb)
+    # for ca in candas: print(ca)
+    # for cb in candbs: print(cb)
     cpairs = get_company_pairs(candas, candbs)
-    print(len(cpairs))
+    # print(len(cpairs))
     scores = []
     for pr in cpairs:
         scores.append([score_pair(pr), pr[0], pr[1]])
