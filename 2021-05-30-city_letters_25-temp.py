@@ -17,7 +17,8 @@ import pandas as pd
 
 ## You'll need to download this CSV file of cities data as I did:
 ## https://worldpopulationreview.com/world-cities
-cities_csv = "../annex/world_cities.csv"
+# cities_csv = "../annex/world_cities.csv"
+cities_csv = "../annex/words_alpha.txt"
 
 letter_values = {
                 'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8,
@@ -29,9 +30,23 @@ letter_values = {
 
 ## open cities file, return list of only cities of 10 letters; do not count
 ## spaces, hyphens, etc; keep only cities with exactly one 's'
+# def get_ten_letter_cities(my_cities_csv):
+#     cities_df = pd.read_csv(cities_csv, index_col=0)
+#     all_cities = list(cities_df["Name"])
+#     my_cities = []
+#     for ac in all_cities:
+#         aclist = [l.lower() for l in ac if l.isalpha()]
+#         if aclist.count('s') == 1:
+#             acjoined = "".join(aclist)
+#             my_cities.append(acjoined)
+#         else:
+#             pass
+#     my_cities = [mc for mc in my_cities if len(mc)==10]
+
 def get_ten_letter_cities(my_cities_csv):
-    cities_df = pd.read_csv(cities_csv, index_col=0)
-    all_cities = list(cities_df["Name"])
+    cities_file = open(my_cities_csv, 'r')
+    cities_df = cities_file.readlines()
+    all_cities = [ct.strip() for ct in cities_df]
     my_cities = []
     for ac in all_cities:
         aclist = [l.lower() for l in ac if l.isalpha()]
@@ -40,15 +55,13 @@ def get_ten_letter_cities(my_cities_csv):
             my_cities.append(acjoined)
         else:
             pass
-    my_cities = [mc for mc in my_cities if len(mc)==10]
-    return my_cities
+    my_cities = [mc for mc in my_cities if len(mc)==6]
 
 
 ## pull each letter's alphabetical value ('a' = 1, 'b' = 2);
 ## if total value is 25, print as solution
 def get_letter_values(my_cities):
     for mc in my_cities:
-        print("\n\n"+mc)
         mclist = [u for u in mc]
         mcval = 0
         for m in mclist:
@@ -58,7 +71,7 @@ def get_letter_values(my_cities):
                 mv = letter_values[m]
                 mcval += mv
                 print(m, mv, mcval)
-        if mcval == 25:
+        if mcval == 108:
             print('SOLUTION: '+mc)
 
 
