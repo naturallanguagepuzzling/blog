@@ -56,6 +56,7 @@ def get_ten_letter_cities(my_cities_csv):
         else:
             pass
     my_cities = [mc for mc in my_cities if len(mc)==6]
+    return my_cities
 
 
 ## pull each letter's alphabetical value ('a' = 1, 'b' = 2);
@@ -70,7 +71,7 @@ def get_letter_values(my_cities):
             else:
                 mv = letter_values[m]
                 mcval += mv
-                print(m, mv, mcval)
+                # print(m, mv, mcval)
         if mcval == 108:
             print('SOLUTION: '+mc)
 
