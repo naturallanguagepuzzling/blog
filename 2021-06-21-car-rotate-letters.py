@@ -16,6 +16,8 @@ import itertools
 import string
 from slugify import slugify
 
+
+## mapping upright capital letters to 90degree rotated letters
 upper_90d = {
     'C': ['U'],
     'E': ['M', 'W'],
@@ -28,6 +30,7 @@ upper_90d = {
     'Z': ['N']
     }
 
+## mapping upright capital letters to 180degree rotated letters
 upper_180d = {
     'A': 'V',
     'M': 'W',
@@ -36,10 +39,11 @@ upper_180d = {
     'W': 'M',
     }
 
-## You can use the text file list of athletes I've prepared; download it from
-## GitHub and store it as I have:
+## You can use the text file lists of cars makers and girls names I've prepared;
+## download them from GitHub and store it as I have:
 car_makers_file = 'resources/car-makers.txt'
 girls_names_file = 'resources/girls-names.txt'
+
 
 ## clean up each name to suit this puzzle: remove any whitespace,
 ## convert to upppercase, slugify (convert to ASCII), remove any non-letters
@@ -50,81 +54,30 @@ def clean_name(somename):
     return s
 
 
-def get_candidate_cars(allcars, k90, k180):
-    ccs = []
-    for ac in allcars:
-        ## first, we check for a letter in the k90 list, followed by a letter in
-        ## the k180 list;
-        acl = list(ac)
-        while acl:
-            l1 = acl.pop(0)
-            print("STEP1: "+l1)
-            while l1 not in k90:
-                while acl:
-                    l1 = acl.pop(0)
-                    print("STEP2: "+l1)
-                    while acl:
-                        l2 = acl.pop(0)
-                        print("STEP3: "+l2)
-                        while l2 not in k180:
-                            while acl:
-                                l2 = acl.pop(0)
-                                print("STEP4: "+l2)
-                            break
-                        ccs.append(ac)
-                        break
-                    break
-                break
-            break
-        ## next, we check for a k180 letter, then k90 letter... this is a bit
-        ## hacky, but should work just fine
-        acl = list(ac)
-        while acl:
-            l1 = acl.pop(0)
-            while l1 not in k180:
-                while acl:
-                    l1 = acl.pop(0)
-                    while acl:
-                        l2 = acl.pop(0)
-                        while l2 not in k90:
-                            while acl:
-                                l2 = acl.pop(0)
-                            break
-                        ccs.append(ac)
-                        break
-                    break
-                break
-            break
-    ccs = list(set(ccs))
-    ccs.sort()
-    return ccs
-
-
+## takes in agenda (see get_car_variants); for each pair of indices in the
+## agenda, does the rotations to produce variant(s)
 def get_variants_by_agenda(car, agenda):
     car = "".join(car)
-    # print(agenda)
     variants = []
     for ag in agenda:
-        # print(ag)
         agvars = []
         i90 = ag[0]
         i180 = ag[1]
-        # print(i90)
-        # print(car[i90])
         v90s = upper_90d[car[i90]]
-        # print(i90, v90s)
         v180 = upper_180d[car[i180]]
-        # print(i180, v180)
         for v90 in v90s:
             carlist = list(car)
             carlist[i90] = v90
             carlist[i180] = v180
             agvars.append("".join(carlist))
-            # print(carlist)
         variants += agvars
     return variants
 
 
+## takes a car maker (string), determines which positions in string can be
+## rotated 90 or 180 degrees; produces a list (agenda) of pairs of positions
+## to rotate in order to produce all variant strings; each pair is:
+## (i90, i80), where i90 is index of letter to be rotated 90 degrees; i90 != i80
 def get_car_variants(car, keys90, keys180):
     cvs = []
     car = list(car)
@@ -135,9 +88,6 @@ def get_car_variants(car, keys90, keys180):
             i90s.append(car.index(lx))
         if lx in keys180:
             i180s.append(car.index(lx))
-    # print(car)
-    # print(i90s)
-    # print(i180s)
     if 0 not in [len(i90s), len(i180s)]:
         agenda = [ii for ii in itertools.product(i90s, i180s) if ii[0] != ii[1]]
         agenda = list(set(agenda))
@@ -147,34 +97,27 @@ def get_car_variants(car, keys90, keys180):
     return cvs
 
 
+## iterate through car makers, expand each car maker to variants using rotated
+## letters; compare variants against list of girl names; print solution
 def cars_vs_girls(cars, girls, keys90, keys180):
     for car in cars:
         car_variants = get_car_variants(car, keys90, keys180)
-        # print(car)
-        # print(car_variants)
+        print(car)
+        print(car_variants)
         for cv in car_variants:
-            # if cv in girls:
             for g in girls:
-                # if g == "WANDA":
-                   # print(cv, g)
                 if cv.strip() == g.strip():
-                    print(cv, g)
+                    print(car, g)
 
 
-## iterate through women's names, expand each first name into candidates;
-## iterate through candidate first names, combine with second name, then iterate
-## through athlete names and check if candidate (first+second) name matches
+## prepare lists of 90degree rotatable and 180degree rotatable letters
 def solve_puzzle(cars, girls):
     keys90 = list(upper_90d.keys())
     keys180 = list(upper_180d.keys())
-    cars = ['MAZDA']
-    ccars = get_candidate_cars(cars, keys90, keys180)
-    print(ccars)
-    cars_vs_girls(ccars, girls, keys90, keys180)    
+    cars_vs_girls(cars, girls, keys90, keys180)    
 
 
 def main():
-    # myletters=list(string.ascii_lowercase)
     girl_file = open(girls_names_file, "r")
     girl_list = girl_file.readlines()
     girl_file.close()
@@ -193,4 +136,5 @@ if __name__ == "__main__":
 
 """
 Solution:
+MAZDA --> WANDA
 """
