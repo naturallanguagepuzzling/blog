@@ -20,7 +20,6 @@ from slugify import slugify
 ## https://github.com/plotly/datasets/blob/master/us-cities-top-1k.csv
 ## You'll need to download that file to run this script.
 cc_csv = "../annex/us-cities-top-1k-plotly.csv"
-# bp_csv = "resources/best-pictures.csv"
 ## I'm using *very* short lists of Japanese and Mexican foods, but given the
 ## the nature of this puzzle, I'm pretty confident we don't need more
 jfoods = ["sushi", "tofu", "ramen", "udon", "soba"]
@@ -30,8 +29,7 @@ mfoods = ["taco", "nacho", "tamal", "burrito", "enchilada", "tostada", "salsa"]
 ## open cities data file; return dictionary; key is slugified and cleaned
 ## and lowercased concatenated string of city name (no spaces); value is
 ## original string of city and state; e.g.:
-## {"sanfrancisco": "San Francisco, California",
-##  "haitiportauprince": "Haiti, Port-au-Prince"}
+## {"sanfrancisco": "San Francisco, California"}
 def get_cities_dict(my_cities_csv):
     cities_df = pd.read_csv(my_cities_csv)
     raw_states = list(cities_df["State"])
@@ -48,6 +46,10 @@ def get_cities_dict(my_cities_csv):
     return cities_dict
  
 
+## triggered when we have find a japanese food substring in a city name string;
+## this takes the city name *minus* the japanese food, and checks the letters
+## against those in each of the mexican foods, returns a the mexican food if it
+## finds a match.
 def check_mfood_vs_city(mx,ct):
     match = "none"
     m1letters = list(mx)
