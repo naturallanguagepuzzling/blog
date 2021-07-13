@@ -24,7 +24,8 @@ Belize
 Benin
 Bermuda
 Bhutan
-Bolivia (Plurinational State of)
+Plurinational State of Bolivia
+Bolivia
 Bonaire, Sint Eustatius and Saba
 Bosnia and Herzegovina
 Botswana
@@ -45,11 +46,12 @@ Chad
 Chile
 China
 Christmas Island
-Cocos (Keeling) Islands
+Cocos Islands
+Keeling Islands
 Colombia
 Comoros
 Congo
-Congo, Democratic Republic of the
+Democratic Republic of the Congo
 Cook Islands
 Costa Rica
 Côte d'Ivoire
@@ -70,7 +72,8 @@ Eritrea
 Estonia
 Eswatini
 Ethiopia
-Falkland Islands (Malvinas)
+Falkland Islands
+Malvinas
 Faroe Islands
 Fiji
 Finland
@@ -103,7 +106,8 @@ Hungary
 Iceland
 India
 Indonesia
-Iran (Islamic Republic of)
+Iran
+Islamic Republic of Iran
 Iraq
 Ireland
 Isle of Man
@@ -116,11 +120,13 @@ Jordan
 Kazakhstan
 Kenya
 Kiribati
-Korea (Democratic People's Republic of)
-Korea, Republic of
+Korea
+Democratic People's Republic of Korea
+Republic of Korea
 Kuwait
 Kyrgyzstan
 Lao People's Democratic Republic
+Laos
 Latvia
 Lebanon
 Lesotho
@@ -142,8 +148,10 @@ Mauritania
 Mauritius
 Mayotte
 Mexico
-Micronesia (Federated States of)
-Moldova, Republic of
+Micronesia
+Federated States of Micronesia
+Moldova
+Republic of Moldova
 Monaco
 Mongolia
 Montenegro
@@ -168,7 +176,7 @@ Norway
 Oman
 Pakistan
 Palau
-Palestine, State of
+Palestine
 Panama
 Papua New Guinea
 Paraguay
@@ -187,7 +195,7 @@ Saint Barthélemy
 Saint Helena, Ascension and Tristan da Cunha
 Saint Kitts and Nevis
 Saint Lucia
-Saint Martin (French part)
+Saint Martin
 Saint Pierre and Miquelon
 Saint Vincent and the Grenadines
 Samoa
@@ -199,7 +207,7 @@ Serbia
 Seychelles
 Sierra Leone
 Singapore
-Sint Maarten (Dutch part)
+Sint Maarten
 Slovakia
 Slovenia
 Solomon Islands
@@ -216,8 +224,10 @@ Sweden
 Switzerland
 Syrian Arab Republic
 Taiwan
+Republic of China
 Tajikistan
-Tanzania, United Republic of
+Tanzania
+United Republic of Tanzania
 Thailand
 Timor-Leste
 Togo
@@ -238,10 +248,12 @@ United States Minor Outlying Islands
 Uruguay
 Uzbekistan
 Vanuatu
-Venezuela (Bolivarian Republic of)
+Venezuela
+Bolivarian Republic of Venezuela
 Viet Nam
-Virgin Islands (British)
-Virgin Islands (U.S.)
+Virgin Islands
+British Virgin Islands
+U.S. Virgin Islands
 Wallis and Futuna
 Western Sahara
 Yemen

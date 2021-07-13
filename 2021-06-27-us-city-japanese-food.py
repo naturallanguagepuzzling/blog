@@ -44,7 +44,7 @@ def get_cities_dict(my_cities_csv):
         dkey = "".join([l.lower() for l in dkey if l.isalpha()])
         cities_dict[dkey] = dval
     return cities_dict
- 
+
 
 ## triggered when we have find a japanese food substring in a city name string;
 ## this takes the city name *minus* the japanese food, and checks the letters
