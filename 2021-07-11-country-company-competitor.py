@@ -16,6 +16,7 @@ former competitor of that brand. Name the country and the brands.
 import pandas as pd
 from slugify import slugify
 
+
 ## List of countries; some are represented more than once, with variant names;
 countries = [
     'Afghanistan', 'Aland Islands', 'Albania', 'Algeria','American Samoa',
@@ -43,7 +44,7 @@ countries = [
     'Islamic Republic of Iran', 'Iraq', 'Ireland', 'Isle of Man', 'Israel',
     'Italy', 'Jamaica', 'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya',
     'Kiribati', 'Korea', "Democratic People's Republic of Korea",
-    'Republic of Korea', 'Kuwait', 'Kyrgyzstan',
+    'Republic of Korea', 'Kuwait', 'Kyrgyzstan', 'Ivory Coast'
     "Lao People's Democratic Republic", 'Laos', 'Latvia', 'Lebanon', 'Lesotho',
     'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macao',
     'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta',
@@ -62,7 +63,7 @@ countries = [
     'Saint Vincent and the Grenadines', 'Samoa', 'San Marino',
     'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles',
     'Sierra Leone', 'Singapore', 'Sint Maarten', 'Slovakia', 'Slovenia',
-    'Solomon Islands', 'Somalia', 'South Africa',
+    'Solomon Islands', 'Somalia', 'South Africa', "Republic of Côte d'Ivoire",
     'South Georgia and the South Sandwich Islands', 'South Sudan', 'Spain',
     'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard and Jan Mayen', 'Sweden',
     'Switzerland', 'Syrian Arab Republic', 'Taiwan', 'Republic of China',
@@ -77,9 +78,10 @@ countries = [
     'British Virgin Islands', 'U.S. Virgin Islands', 'Wallis and Futuna',
     'Western Sahara', 'Yemen', 'Zambia', 'Zimbabwe']
 
-## Totally ugly and unvetted list that should be stored in a txt or csv but
-## I'm pasting it here to keep things simple. I cobbled this list together
-## from various online lists of top US brands, top worldwide brands, etc.
+
+# ## Totally ugly and unvetted list that should be stored in a txt or csv but
+# ## I'm pasting it here to keep things simple. I cobbled this list together
+# ## from various online lists of top US brands, top worldwide brands, etc.
 brands = [
     '20th Television', '3', '3M', '7-Eleven', 'ABB', 'ABC', 'ABN Amro',
     'ADNOC', 'ADP', 'AIA', 'AIG', 'ANZ', 'AOL', 'ARMCO', 'ASML', 'AT&T',
@@ -88,7 +90,7 @@ brands = [
     'Adobe', 'Aetna', 'Aflac', 'Airbus', 'Airtel', 'Alcoa', 'Aldi',
     'Alibaba.com', 'Allianz', 'Allstate', 'Altria Group', 'Amazon.com',
     'Amerada Hess', 'American Airlines', 'American Can', 'American Express',
-    'American Standard', 'AmerisourceBergen', 'Amoco', 'Am√©rica M√≥vil',
+    'American Standard', 'AmerisourceBergen', 'Amoco',
     'Anaconda', 'Anheuser-Busch', 'Anta', 'Anthem', 'Apple', 'Apple Computer',
     'Applied Materials', 'Archer Daniels Midland', 'Armour', 'Asda', 'Ashland',
     'AstraZeneca', 'Atlantic Richfield', 'Auchan', 'Audi', 'AutoZone', 'Aviva',
@@ -194,7 +196,7 @@ brands = [
     'Ross Dress For Less', 'Royal Bank of Scotland', 'Ryerson Tull',
     'S&P Global', 'SABIC', 'SANTANDER', 'SAP', 'SF Express', 'SFR', 'SK Group',
     'STANDARD BANK OF SOUTH AFRICA', 'SUEZ Environment', 'SUMITOMO MITSUI',
-    'Safran', "Sainsbury's", 'Saint-Gobain', 'Salesforce', "Sam's Club",
+    'Saab', 'Safran', "Sainsbury's", 'Saint-Gobain', 'Salesforce', "Sam's Club",
     'Samsung', 'Samsung Group', 'Sanofi', 'Santander',
     'Sara Lee', 'Saudi Aramco', 'Sber', 'Scotiabank', 'Sealed Air', 'Sephora',
     'Servicenow', 'Shanghai Pudong Development Bank', 'Sharp', 'Shell',
@@ -227,52 +229,27 @@ brands = [
     'Yonghui Superstores', 'YouTube', 'Youku', 'ZARA', 'Zalando', 'Zara',
     'Zurich', 'accenture', 'adidas', 'booking.com', 'eBay', 'movistar']
 
+
 ## tokenize string, convert to nearest ASCII, remove whitespace and non-letters
 def clean_string(ugly):
     ugly = ugly.split(" ")
     ugly = [slugify(g) for g in ugly]
-    clean = "".join([l.lower() for l in ugly if l.isalpha()])
+    ugly = "".join(ugly)
+    clean = "".join([l for l in ugly if l.isalpha()])
     return clean
- 
-
-## triggered when we have find a japanese food substring in a city name string;
-## this takes the city name *minus* the japanese food, and checks the letters
-## against those in each of the mexican foods, returns a the mexican food if it
-## finds a match.
-def check_mfood_vs_city(mx,ct):
-    match = "none"
-    m1letters = list(mx)
-    m2letters = list(mx+"s")
-    m3letters = list(mx+"es")
-    m1letters.sort()
-    m2letters.sort()
-    m3letters.sort()
-    m1 = "".join(m1letters)
-    m2 = "".join(m2letters)
-    m3 = "".join(m3letters)
-    if ct == m1:
-        match = mx
-    elif ct == m2:
-        match = mx+"s"
-    elif ct == m3:
-        match = mx+"es"
-    else:
-        pass
-    return match
 
 
 def main():
-    for c in countries:
-        cclean = clean_string(c)
-        if len(cclean) >8:
-            for b in brands:
-                bclean = clean_string(b)
-                if not bclean:
-                    pass
-                else:
-                    if bclean in cclean:
-                        rival = cclean[0]+cclean[1]+cclean[7]+cclean[8]
-                        print(cclean+" # "+bclean+" % "+rival)
+    cs = [clean_string(ct) for ct in countries if clean_string(ct)]
+    cs = [ct for ct in cs if len(ct) > 8]
+    bs = [clean_string(br) for br in brands if clean_string(br)]
+    bs = [br for br in bs if len(br) > 2]
+    for c in cs:
+        for b in bs:
+            if b in c:
+                rival = c[0]+c[1]+c[7]+c[8]
+                if rival in bs:
+                    print(c+" & "+b+" & "+rival)
 
 
 if __name__ == "__main__":
@@ -282,4 +259,5 @@ if __name__ == "__main__":
 
 """
 SOLUTION:
+saudiarabia & audi & saab
 """
