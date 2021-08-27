@@ -25,11 +25,11 @@ import string
 cc_csv = "../annex/us-cities-top-1k-plotly.csv"
 
 ## contains "zero", "one", "two", thru "one hundred"; one per line; download it:
-## 
+## https://github.com/naturallanguagepuzzling/blog/blob/master/resources/cardinals_100.txt
 cardinals_file = "resources/cardinals_100.txt"
 
 ## contains "first", "second", thru "one hundredth"; one per line: download it:
-##
+## https://github.com/naturallanguagepuzzling/blog/blob/master/resources/ordinals_100.txt
 ordinals_file = "resources/ordinals_100.txt"
 
 
@@ -86,6 +86,54 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 """
