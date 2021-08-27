@@ -79,9 +79,8 @@ def main():
             for card in cardinals:
                 if card in shifted:
                     short = shifted.replace(card, "")
-                    for ordl in ordinals:
-                        if ordl in short:
-                            print("SOLUTION: '"+rawcity+"' --> '"+shifted+"', which contains '"+card+"'; removing '"+card+"' yields '"+ordl+"'")
+                    if short in ordinals:
+                        print("SOLUTION: '"+rawcity+"' --> '"+shifted+"', which contains '"+card+"'; removing '"+card+"' yields '"+short+"'")
 
 
 if __name__ == "__main__":
