@@ -129,7 +129,7 @@ def main():
     all_words = get_all_words(my_queries, my_top_k)
     # print(all_words)
     for myplant in mygarden:
-        print(myplant)
+        # print(myplant)
         plurals = [myplant]
         if myplant[-1] == "s":
             plurals.append(myplant[:-1])
@@ -137,10 +137,10 @@ def main():
             plurals.append(myplant+"s")
         for plur in plurals:
             for myadj in all_words:
-                print("\t"+myadj)
+                # print("\t"+myadj)
                 if len(myadj) == len(plur)+1:
                     expanded = expand_candidate(plur)
-                    for exp in expanded: print("\t\t"+exp)
+                    # for exp in expanded: print("\t\t"+exp)
                     if myadj in expanded:
                         solutions.append([plur, myadj])
                         print("SOLUTION: ", plur+" --> "+myadj)
