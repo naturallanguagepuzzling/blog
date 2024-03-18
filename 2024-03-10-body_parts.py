@@ -4,16 +4,16 @@
 ## 2024/03/11. Levi K. From the blog,
 ## https://naturallanguagepuzzling.blogspot.com
 ## This code was written to assist with the 2024/03/10 Sunday Puzzle:
-# https://www.npr.org/2024/03/10/1236986870/sunday-puzzle-can-you-guess-the-body-part-with-these-clues
+## https://www.npr.org/2024/03/17/1238827590/sunday-puzzle-beware-the-ides-of-march
 ## That puzzle:
 """
-This week's challenge: Take a body part, add a letter at beginning and end to get another body part, then add another letter at beginning and end to get something designed to affect that body part.
+This week's challenge: Take a body part, add a letter at beginning and end to
+get another body part, then add another letter at beginning and end to get
+something designed to affect that body part.
 """
 
-# Get the script's directory
 
 import pandas as pd
-# from os import walk
 from pytorch_pretrained_bert import BertTokenizer,BertForMaskedLM
 import torch
 import math
@@ -30,7 +30,6 @@ letter_permutations = itertools.permutations('abcdefghijklmnopqrstuvwxyz', 2)
 
 
 bodyparts = ['abdomen', 'adrenal', 'ankle', 'anus', 'aorta', 'appendix', 'arch', 'arm', 'artery', 'astragalus', 'atlas', 'axis', 'back', 'backbone', 'belly', 'bladder', 'blood', 'bone', 'brachial', 'brain', 'brainstem', 'breastbone', 'bronchus', 'buttock', 'calcaneus', 'calf', 'canine', 'capillary', 'carotid', 'carpal', 'cerebrum', 'cervical', 'cervix', 'cheek', 'chest', 'chin', 'clavicle', 'coccyx', 'collarbone', 'colon', 'cranium', 'cuboid', 'diaphragm', 'duodenum', 'ear', 'elbow', 'epididymis', 'esophagus', 'ethmoid', 'eye', 'eyebrow', 'eyelash', 'eyelid', 'face', 'fallopian', 'femoral', 'femur', 'fibula', 'finger', 'fist', 'foot', 'forearm', 'forehead', 'gallbladder', 'gland', 'groin', 'gum', 'hair', 'hamstring', 'hand', 'head', 'heart', 'heel', 'hip', 'humerus', 'ileum', 'ilium', 'incisor', 'intestine', 'iris', 'ischium', 'jaw', 'jejunum', 'joint', 'jugular', 'kidney', 'knee', 'kneecap', 'knuckle', 'larynx', 'leg', 'lip', 'liver', 'lumbar', 'lung', 'lymph', 'mandible', 'mastoid', 'maxilla', 'metacarpal', 'metatarsal', 'molar', 'mouth', 'muscle', 'nail', 'nasal', 'navel', 'navicular', 'neck', 'nerve', 'node', 'nose', 'nostril', 'occiput', 'ovary', 'palm', 'pancreas', 'parathyroid', 'patella', 'pelvis', 'penis', 'peroneal', 'phalange', 'pineal', 'pinky', 'pituitary', 'prostate', 'pubis', 'pupil', 'radial', 'radius', 'rectum', 'retina', 'rib', 'sacrum', 'scapula', 'sesamoid', 'shin', 'shoulder', 'sinus', 'skin', 'skull', 'sole', 'sphenoid', 'spine', 'spleen', 'sternum', 'stomach', 'subclavian', 'talus', 'tarsal', 'teeth', 'temples', 'tendon', 'testes', 'thigh', 'thoracic', 'throat', 'thumb', 'thymus', 'thyroid', 'tibia', 'toe', 'tongue', 'tooth', 'trachea', 'ulna', 'ulnar', 'urethra', 'uterus', 'vagina', 'vein', 'waist', 'wrist', 'xiphoid', 'zygomatic']
-
 
 
 def get_pairs(mylist):
@@ -99,28 +98,6 @@ def main():
                     if bp in wd:
                         print(bp, wd)
 
-    # candidate_pairs = get_pairs(bodyparts)
-    # print(candidate_pairs)
-    # candidate_triples = check_permutations(candidate_pairs)
-    # # candidate_triples = check_permutations([('ear', 'ear')])
-    # for ct in candidate_triples:
-    #     print(ct)
-        
-
-    # candas = get_company_a_candidates(m_alts)  ## 5,5
-    # candbs = get_company_b_candidates(m_alts)  ## 5,7,5
-    # # for ca in candas: print(ca)
-    # # for cb in candbs: print(cb)
-    # cpairs = get_company_pairs(candas, candbs)
-    # # print(len(cpairs))
-    # scores = []
-    # for pr in cpairs:
-    #     scores.append([score_pair(pr), pr[0], pr[1]])
-    # scores.sort()
-    # for sc in scores:
-    #     print(sc)
-
 
 if __name__ == "__main__":
     main()
-
