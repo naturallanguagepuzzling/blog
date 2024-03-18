@@ -16,7 +16,7 @@ the second company wants. What is it?
 
 
 import pandas as pd
-from os import walk
+import os
 
 
 from pytorch_pretrained_bert import BertTokenizer,BertForMaskedLM
@@ -27,7 +27,7 @@ import math
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 bertMaskedLM = BertForMaskedLM.from_pretrained('bert-base-uncased')
 bertMaskedLM.eval()
-
+script_dir = os.path.dirname(__file__)
 
 
 ## For every name in our list, we want to try dropping these words before we
@@ -162,7 +162,8 @@ def score_pair(cpr):
 
 
 def main():
-    mcl = get_starting_companies("resources/companies.txt")
+    file_path = os.path.join(script_dir, "resources", "companies.txt")
+    mcl = get_starting_companies(file_path)
     m_alts = []
     for mcname in mcl:
         mcname = preprocess_company_name(mcname)
