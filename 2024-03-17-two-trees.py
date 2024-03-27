@@ -31,14 +31,14 @@ bertMaskedLM.eval()
 script_dir = os.path.dirname(__file__)
 
 trees = [
-    # 'ash', 
-    # 'elm', 
-    # 'fig', 
+    'ash', 
+    'elm', 
+    'fig', 
     'fir', 
-    # 'gum', 
-    # 'oak', 
-    # 'tea', 
-    # 'wax', 
+    'gum', 
+    'oak', 
+    'tea', 
+    'wax', 
     'yew',
     # 'cot', #testcase
     # 'ton', #testcase
@@ -83,34 +83,6 @@ def main():
         print(pt)
         ptavg = score_candidate(pt)
         print(ptavg)
-
-    # for wd in words.words():
-    #     for bp in bodyparts:
-    #         if bp != wd:
-    #             if len(wd) in range(len(bp)+2, len(bp)+3):
-    #                 if bp in wd:
-    #                     print(bp, wd)
-
-    # candidate_pairs = get_pairs(bodyparts)
-    # print(candidate_pairs)
-    # candidate_triples = check_permutations(candidate_pairs)
-    # # candidate_triples = check_permutations([('ear', 'ear')])
-    # for ct in candidate_triples:
-    #     print(ct)
-        
-
-    # candas = get_company_a_candidates(m_alts)  ## 5,5
-    # candbs = get_company_b_candidates(m_alts)  ## 5,7,5
-    # # for ca in candas: print(ca)
-    # # for cb in candbs: print(cb)
-    # cpairs = get_company_pairs(candas, candbs)
-    # # print(len(cpairs))
-    # scores = []
-    # for pr in cpairs:
-    #     scores.append([score_pair(pr), pr[0], pr[1]])
-    # scores.sort()
-    # for sc in scores:
-    #     print(sc)
 
 
 if __name__ == "__main__":
