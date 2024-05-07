@@ -121,6 +121,7 @@ def main():
         yompany = "Y"+company[1:]
         print(company)
         yanagrams = get_valid_anagrams(yompany, lex)
+        print(yanagrams)
         for frame in frames:
             frame = frame.replace("__1__", company)
             for yan in yanagrams:
