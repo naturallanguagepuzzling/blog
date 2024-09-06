@@ -36,7 +36,6 @@ misspelling M IH0 S S P EH1 L IH0 NG
 from slugify import slugify
 
 tv_persons_file = "resources/past-tv-personalities.txt"
-# tv_persons_file = "resources/tvtest.txt"
 
 
 def get_lex(some_lexicon_filename):
@@ -73,17 +72,6 @@ def filter_empty_lists(dictionary):
       filtered_dict[key] = value
   return filtered_dict
 
-def get_personsx(persons):
-    personsxs = []
-    for person in persons:
-        person = person.split(" ")
-        surname = person.pop()
-        surname = surname[0]+surname[2:]
-        person = " ".join(person)
-        personx = (person+" "+surname)
-        personsxs.append(personx)
-    return personsxs
-
 def get_personx(person):
     person = person.split(" ")
     surname = person.pop()
@@ -112,20 +100,23 @@ creatures = [
             ]
 
 def main():
+    ## prep creatures data objects
     crs = []
     for c in creatures:
         crs.append(slugify(c))
     crs = [c.replace("-", " ") for c in crs]
     creature_prons = get_pron_dict_for_cands(crs)
     creature_prons = filter_empty_lists(creature_prons)
+    ## prep TV personalities data objects
     tvp = get_lex(tv_persons_file)
     tvpslug = []
     for t in tvp:
         tvpslug.append(slugify(t))
     persons = [t.replace("-", " ") for t in tvpslug]
-    psx = get_personsx(persons)
+    psx = [get_personx(p) for p in persons]
     person_prons = get_pron_dict_for_cands(psx)
     person_prons = filter_empty_lists(person_prons)
+    ## iterate through persons, then creatures to match pronunciations
     for pr in persons:
         personx = get_personx(pr)
         ppron = ''
@@ -135,7 +126,6 @@ def main():
             else:
                 ppron += person_prons[pname][0]
         for cr in creature_prons:
-            # print(pron_strip(creature_prons[cr][0])+" | "+pron_strip(ppron))
             if pron_strip(creature_prons[cr][0]) == pron_strip(ppron):
                 print("MATCH: "+pr+" | "+cr+" | "+creature_prons[cr][0])
             else:
