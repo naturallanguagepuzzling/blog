@@ -20,7 +20,7 @@ from transformers import GPT2LMHeadModel, GPT2Tokenizer
 ## You'll need to download and store the file as I did; I'm using the first 
 ## 10,000 words (lines) from this file:
 ## https://github.com/first20hours/google-10000-english/blob/master/20k.txt
-lexfilename = "../annex/10k.txt"
+lexfilename = "./resources/10k-lexicon.txt"
 companies = [
     'JD', 'QQ', 'VK', 'B2W', 'BMC', 'Box', 'CDK', 'Max', 'ANGI', 'ASOS',
     'Bing', 'Epic', 'Etsy', 'GoTo', 'Grab', 'Hulu', 'Kwai', 'Lyft', 'Meta',
@@ -121,7 +121,9 @@ def main():
         yompany = "Y"+company[1:]
         print(company)
         yanagrams = get_valid_anagrams(yompany, lex)
-        print(yanagrams)
+        if yanagrams:
+            print(yanagrams)
+            print("\n\n")
         for frame in frames:
             frame = frame.replace("__1__", company)
             for yan in yanagrams:
