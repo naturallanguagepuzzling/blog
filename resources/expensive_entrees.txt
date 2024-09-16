@@ -1,0 +1,99 @@
+Abalone
+Alaskan King Crab
+Arctic Char
+Baked Alaska
+Barramundi
+Beef Wellington
+Beluga Caviar
+Black Cod Miso
+Black Truffle Pizza
+Bluefin Tuna
+Bouillabaisse
+Branzino
+Carabineros
+Caviar
+Chanterelle Mushrooms
+Chateaubriand
+Chilean Sea Bass
+Coq au Vin
+Dover Sole
+Eel
+Filet Mignon
+Foie Gras
+Frog Legs
+Gnocchi with Truffle
+Grouper
+Guinea Fowl
+Hake
+Halibut
+Hanger Steak
+Iberico Ham
+John Dory
+King Prawns
+Kobe Beef
+Langoustine Risotto
+Langoustines
+Lobster Bisque
+Lobster Ravioli
+Lobster Thermidor
+Mahi Mahi
+Marlin
+Monkfish
+Morel Mushrooms
+Moreton Bay Bugs
+Octopus
+Orange Roughy
+Oysters Rockefeller
+Partridge
+Patagonian Toothfish
+Peking Duck
+Pheasant
+Pompano
+Porchetta
+Porcini Mushrooms
+Quail
+Rack of Lamb
+Red Mullet
+Red Snapper
+Roasted Goose
+Rock Lobster
+Sablefish
+Saffron Paella
+Sardines
+Scallops
+Sea Bream
+Sea Urchin
+Skate Wing
+Smoked Salmon
+Snapper
+Snow Crab
+Soft Shell Crab
+Sole Véronique
+Spiny Lobster
+Squab
+Squid Ink Pasta
+Stone Crab
+Stuffed Quail
+Sturgeon
+Suckling Pig
+Surf and Turf
+Sweetbreads
+Swordfish
+Tilefish
+Truffle Pasta
+Truffle Risotto
+Turbot
+Turbot Fillet
+Turbotin
+Veal Ossobuco
+Venison
+Wagyu Beef
+Wahoo
+White Truffle Pasta
+Whitebait
+Wild Boar
+Wild Salmon
+Yellowfin Tuna
+Yellowtail
+Zander
+Zucchini Blossoms
