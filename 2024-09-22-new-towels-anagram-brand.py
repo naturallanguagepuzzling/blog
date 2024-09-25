@@ -8,7 +8,8 @@
 ## That puzzle:
 """
 Take the phrase NEW TOWELS. Rearrange its nine letters to get the brand name
-of a product that you might buy at a supermarket."""
+of a product that you might buy at a supermarket.
+"""
 
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
