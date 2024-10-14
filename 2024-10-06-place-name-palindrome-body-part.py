@@ -46,7 +46,6 @@ def sent_scoring(model_tokenizer, text):
     with torch.no_grad():
         outputs = model(input_ids, labels=input_ids)
     loss = outputs[0]
-    # logits = outputs [1]
     sentence_prob = loss.item()
     return sentence_prob
 
@@ -57,17 +56,11 @@ def transform_string(mystring):
     return candidate
 
 def clean_string(ugly):
-    # print("0: ", ugly)
     ugly = ugly.strip()
     ugly = ugly.split(" ")
-    # print("1: ", ugly)
     ugly = [slugify(g) for g in ugly]
-    # print("2: ", ugly)
     ugly = [g.replace('-', '') for g in ugly]
-    # print("3: ", ugly)
     ugly = " ".join(ugly)
-    # ugly = "".join([l for l in ugly if l.isalpha()])
-    # print("4: ", ugly)
     return ugly
 
 def check_first_five(mystring):
@@ -107,10 +100,8 @@ def main():
     candidate_places = list(set(candidate_places))
     palindromes = []
     for cand in candidate_places:
-        # print(cand)
         if check_first_five(cand) == True:
             palindromes.append(cand)
-            # print(cand+" :  "+cand[5:])
     model, tokenizer = load_model('gpt2')
     ranked = []
     for pal in palindromes:
