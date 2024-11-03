@@ -65,7 +65,6 @@ def main():
             ranked.append([score, plc, tf])
     ranked.sort()
     for r in ranked:
-        # print('\t'.join([str(r[0]), r[1], r[2]]))
         print('\t'.join([f"{r[0]:.2f}", r[1], r[2]]))
 
 
