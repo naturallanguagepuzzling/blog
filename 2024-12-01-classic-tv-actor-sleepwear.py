@@ -31,7 +31,6 @@ def pron_mod(mypron):
 
 def create_cmu_p2g():
     cmu_file = '../annex/cmudict-master/modified-cmudict-dict.txt'
-    # cmu_file = '../annex/cmudict-master/my-sample-dict.txt'
     p2g = {}
     with open(cmu_file, 'r') as cf:
         cmu_raw = cf.readlines()
@@ -78,15 +77,11 @@ def sent_scoring(model_tokenizer, text):
 
 def main():
     actors = get_actors()
-    # actors = ['Hal Holbrook', 'Haley Osment', 'Nick Cage', 'Ted Knight', 'Bob Knight', 'Harrison Ford', 'Helena Carter', 'Henry Cavill']
     model, tokenizer = load_model('gpt2')
     g2p = G2p()
     p2g = create_cmu_p2g()
-    # print("\n\nTED RESULTS")
-    # print(p2g['T EH D'])
     ranked = []
     for actr in actors:
-        # print("\n$\n\n"+actr)
         acr = actr.split(" ")
         first = acr[0]
         last = acr[1]
