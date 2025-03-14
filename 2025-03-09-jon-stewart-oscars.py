@@ -3,7 +3,7 @@
 ## 2025/03/09. Levi King. From the blog,
 ## https://naturallanguagepuzzling.blogspot.com
 ## This code was written to assist with the 2025/03/09 Sunday Puzzle:
-## https://www.npr.
+## https://www.npr.org/2025/03/08/nx-s1-5320936/sunday-puzzle-eye-oh
 ## That puzzle:
 
 """
