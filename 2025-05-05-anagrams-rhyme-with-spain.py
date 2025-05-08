@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-## 2025/04/10. Levi King. From the blog,
+## 2025/05/05. Levi King. From the blog,
 ## https://naturallanguagepuzzling.blogspot.com
-## This code was written to assist with the 2025/04/06 Sunday Puzzle:
-## https://www.npr.org/2025/04/05/nx-s1-5344989/sunday-puzzle-whats-that-familiar-phrase
+## This code was written to assist with the 2025/05/04 Sunday Puzzle:
+## https://www.npr.org/2025/05/04/nx-s1-5382352/sunday-puzzle-two-plus-five
 ## That puzzle:
 
 """
